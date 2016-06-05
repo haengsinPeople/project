@@ -1,38 +1,84 @@
-<html>
-	<head>
-          <title>Davinci Code Game</title>
-	</head>
-<p> 게임페이지 </p>
-{{a}}
-{{b}}
-<form>
-위치 : <input type="text" name="location" id="location" maxlength="2" value=""/>
-<table border="select">
-<tr>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=0> 0</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=1> 1</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=2> 2</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=3> 3</td>
-</tr>
-<tr>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=4> 4</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=5> 5</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=6> 6</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=7> 7</td>
-</tr> <td><INPUT TYPE=CHECKBOX NAME=num VALUE=8> 8</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=9> 9</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=10> 10</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=11> 11</td>
-</tr>
-<tr>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=12> 12</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=joker> Joker</td>
- <td><INPUT TYPE=CHECKBOX NAME=num VALUE=pass> Pass</td>
- <td><input type="submit" value="Select"/> </td>
-</tr>
-<tr>
+{% load staticfiles %}
 
-</table>
-</form>
+ <html>
+        <head>
+            <title>Davinci code</title>
+        </head>
+        
 
-</html>
+        <body oncontextmenu='return false' bgcolor="pink">
+            
+            <div style="width: 1040px; height: 170px; border:1px solid pink; padding : 0px 0px 0px 10px; float: left;">
+                <h1>player {{number}}</h1>
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+                <img src="{% static "white_back.png" %}" width= "80" height="80">
+            </div>
+            
+            <div style="width: 1040px; height: 180px; border:1px solid pink; padding : 0px 0px 0px 10px; float: left;">
+            </div>
+             <div style="width: 150px; height: 270px; border:1px solid pink; padding : 0px 0px 0px 0   px; float: right;">
+                <form>
+                    <center>선택 화면</center>
+                    <select name="select" >
+                    <option disabled>위치를 선택해 주세요</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="1" name="num">1&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="2" name="num">2</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="3" name="num">3&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="4" name="num">4</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="5" name="num">5&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="6" name="num">6</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="7" name="num">7&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="8" name="num">8</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="9" name="num">9&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="10" name="num">10</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="11" name="num">11
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="12" name="num">12</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="joker" name="num">Joker</br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="pass" name="num">Pass</br>
+                    <center><button type="submit"><h4>&nbsp;&nbsp;Select&nbsp;&nbsp;</h4></button></center>
+        
+                </form>
+            </div>
+            
+            <div style="width: 1040px; height: 170px; border:1px solid pink; padding : 0px 0px 0px 10px; float: left;">
+                <h1>player {{number}}</h1>    
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+                <img src="{% static "black_back.png" %}" width= "80" height="80">
+            </div>
+
+        </body>
+    </html>

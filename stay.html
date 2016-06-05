@@ -1,20 +1,20 @@
+{% load staticfiles%}
+
 <html>
-      <head>
-      <title>Davinci Code Game</title>
-      </head>
-
-      <body bground="white" oncontextmenu='return false'>
-</br></br></br></br></br></br></br></br></br></br>
-<meta http-equiv="refresh" content="5">
-<div><center><h2>상대 플레이어를 기다리는 중입니다</h2></center></div>
-<div style = "padding : 0px 560px 0px 560px;"><center><h1><MARQUEE behavior="alternate">Wait...</MARQUEE></h1></center></div>
-<div>
-	<form action='main'>
-	     <center><button><h3> 돌아가기 </h3></button></center>
-     </form>
-</div>
-
-
-</body>
+	<head>
+		<title> 대기 방 화면 </title>
+	</head>
+	<body>
+	<meta http-equiv="refresh" content="10">
+	<ul>
+	{% for room in rooms%}
+	
+		{%if room.is_playing%} <h2>{{room.room_name}}</h2>  게임중.. {%else%} <a href = "../room/{{room.name}}"><h2>{{room.room_name}}</h2></a> 대기중..  {% endif %} {{room.player_number}}명<br>
+		
+		{% for player in room.join_players.all %}
+			<li>{{player.nickname}}님
+		{% endfor %}
+	{% endfor %}
+	<ul>
+	</body>
 </html>
-
