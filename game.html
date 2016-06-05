@@ -6,29 +6,30 @@
         </head>
         
 
-        <body oncontextmenu='return false' bgcolor="pink">
-            
-            <div style="width: 1040px; height: 170px; border:1px solid pink; padding : 0px 0px 0px 10px; float: left;">
-                <h1>player {{number}}</h1>
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
-                <img src="{% static "white_back.png" %}" width= "80" height="80">
+        <body oncontextmenu='return false' bgcolor="black" style = "padding : 20px 20px 20px 20px;">
+        <center><img src="{% static "davinci.png" %}" width= "350" height="60"></center>
+            <div style="width: 1120px; height: 170px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
+                <h1><span style = "color : white">player {{number}}</h1>
+                <img src="{% static "white_0.png" %}" width= "80" height="80">
+                <img src="{% static "white_1.png" %}" width= "80" height="80">
+                <img src="{% static "white_2.png" %}" width= "80" height="80">
+                <img src="{% static "white_3.png" %}" width= "80" height="80">
+                <img src="{% static "white_4.png" %}" width= "80" height="80">
+                <img src="{% static "white_5.png" %}" width= "80" height="80">
+                <img src="{% static "white_6.png" %}" width= "80" height="80">
+                <img src="{% static "white_7.png" %}" width= "80" height="80">
+                <img src="{% static "white_8.png" %}" width= "80" height="80">
+                <img src="{% static "white_9.png" %}" width= "80" height="80">
+                <img src="{% static "white_10.png" %}" width= "80" height="80">
+                <img src="{% static "white_11.png" %}" width= "80" height="80">
+                <img src="{% static "white_12.png" %}" width= "100" height="80">
+                
             </div>
-            
-            <div style="width: 1040px; height: 180px; border:1px solid pink; padding : 0px 0px 0px 10px; float: left;">
-            </div>
-             <div style="width: 150px; height: 270px; border:1px solid pink; padding : 0px 0px 0px 0   px; float: right;">
+            <div style="width: 150px; height: 400px; border:1px solid black; padding : 0px 0px 0px 30px   px; float: right;">
                 <form>
-                    <center>선택 화면</center>
+                <span style = "color : white">
+                </br></br></br></br></br></br>
+                    <center><h3>Select</h3></center>
                     <select name="select" >
                     <option disabled>위치를 선택해 주세요</option>
                     <option>1</option>
@@ -45,39 +46,44 @@
                     <option>12</option>
                     <option>13</option>
                     </select>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="1" name="num">1&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="2" name="num">2</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="3" name="num">3&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="4" name="num">4</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="5" name="num">5&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="6" name="num">6</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="7" name="num">7&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="8" name="num">8</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="9" name="num">9&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="10" name="num">10</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="11" name="num">11
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="12" name="num">12</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="joker" name="num">Joker</br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="pass" name="num">Pass</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="num">&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="1" name="num">&nbsp;1</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="2" name="num">&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="3" name="num">&nbsp;3</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="4" name="num">&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="5" name="num">&nbsp;5</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="6" name="num">&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    <input type="radio" value="7" name="num">&nbsp;7</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="8" name="num">&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="9" name="num">&nbsp;9</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="10" name="num">&nbsp;10&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="11" name="num">&nbsp;11</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="joker" name="num">&nbsp;Joker
+                    <input type="radio" value="pass" name="num">&nbsp;Pass</br></br></center>
                     <center><button type="submit"><h4>&nbsp;&nbsp;Select&nbsp;&nbsp;</h4></button></center>
         
                 </form>
             </div>
             
-            <div style="width: 1040px; height: 170px; border:1px solid pink; padding : 0px 0px 0px 10px; float: left;">
-                <h1>player {{number}}</h1>    
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
-                <img src="{% static "black_back.png" %}" width= "80" height="80">
+            <div style="width: 1040px; height: 180px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
+            </div>
+             
+            <div style="width: 1120px; height: 170px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
+                <h1><span style = "color : white">player {{number}}</h1>    
+                <img src="{% static "black_0.png" %}" width= "80" height="80">
+                <img src="{% static "black_1.png" %}" width= "80" height="80">
+                <img src="{% static "black2.png" %}" width= "80" height="80">
+                <img src="{% static "black_3.png" %}" width= "80" height="80">
+                <img src="{% static "black_4.png" %}" width= "80" height="80">
+                <img src="{% static "black_5.png" %}" width= "80" height="80">
+                <img src="{% static "black_6.png" %}" width= "80" height="80">
+                <img src="{% static "black_7.png" %}" width= "80" height="80">
+                <img src="{% static "black_8.png" %}" width= "80" height="80">
+                <img src="{% static "black_9.png" %}" width= "80" height="80">
+                <img src="{% static "black_10.png" %}" width= "80" height="80">
+                <img src="{% static "black_11.png" %}" width= "80" height="80">
+                <img src="{% static "black_12.png" %}" width= "100" height="80">
             </div>
 
         </body>
