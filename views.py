@@ -145,6 +145,9 @@ def post_game(request, name):
 
 @csrf_exempt
 def room(request):
+	new_Room = Room(name = name)
+	new_Room.save()
+	request.session['name'] = name
 	        
 	tpl = loader.get_template('game/room.html')
 	ctx = Context({})
