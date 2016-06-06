@@ -1,38 +1,27 @@
 
 # coding: utf-8
 
-# In[79]:
+# In[158]:
 
 import random
- 
 
-# check int type
-def is_int(x):
-    if int(x) == x:
-        return True
-    else: 
-        return False
- 
- 
-# In[21]:
- 
 # all deck list init
-def Deck():
-    i = 0
+class Deck:
     deck = []
-    while i<26:
-        if(i == 24):
-                deck.append([i,'joker','흑',0])
-        elif(i == 25):
-                deck.append([i,'joker','백',0])
-        elif(i%2 == 0):
-            
-                deck.append([i,int(i/2),'흑',0]) 
-        else:
-                deck.append([i,int(i/2),'백',0])
-        i = i +1
-    return deck
- 
+    def __init__(self):
+        i = 0
+        while i < 26:
+            if(i == 24):
+                self.deck.append([i,77,'검',0])
+            elif(i == 25):
+                self.deck.append([i,77,'흰',0])
+            elif(i % 2 == 0):
+                self.deck.append([i,int(i/2),'검',0]) 
+            else:
+                self.deck.append([i,int(i/2),'흰',0])
+            i = i + 1
+
+
 # player init
 class player:
     nickname = "unknown",
@@ -40,51 +29,63 @@ class player:
     Turn = 0
     Finded = 0
     Num_of_joker = 0 # 갖고있는 조커 카드수
-    Last_card = 0
+    Last_card = []
     Get_pos = 0
     
  
-# when a game is started, player 4deck init
+# when a game is started, player 4_deck init
 def Start(player1, deck):
         for i in range(4):
             j = random.randint(0,len(deck)-1)
             player1.Hand.append(deck[j])
-            if deck[j][0] == 24 or deck[j][0] == 25:
+            if deck[j][1] == 77:
                 player1.Num_of_joker = player1.Num_of_joker + 1
             deck.remove(deck[j])
         player1.Hand.sort()
-        player1.Last_card = player1.Hand[3][0]
+        player1.Last_card = player1.Hand[3]
 
 def DetermineJoker(player1):
-    Det = 0
-    for i in range(len(player1.Hand)-1):
-        if is_int(player1.Hand[i][0]) == False:
-            if player1.Hand[i][0] < player1.Last_card < player1.Hand[i+1][0]:
-                Det += 1
-                break
-            
 # 1. 조커를 새로운 카드로 받을 경우 - Lastcard에 deck[i][0] 저장
-    if player1.Last_card == 24 or player1.Last_card == 25:
+    if player1.Last_card[0] == 24 or player1.Last_card[0] == 25:
         return 1
     
 # 2. 원래 있던 조커 순위 인덱스를 변경해야 할 경우 - 받을 수 있는 pos 2개로 한정
-    elif player1.Num_of_joker != 0 and Det != 0:
+    elif player1.Num_of_joker != 0:
+        Det = 0
+        for i in range(len(player1.Hand)):
+            if player1.Hand[i][0] == Last_card[0]:
+                if i < len(player1.Hand) -1:
+                    if player1.Hand[i+1][1] == 77:
+                    
+                if i > 0:    
+                    if player1.Hand[i-1][1] == 77:    
+                
+        
+        
+        for i in range(len(player1.Hand)-3):
+            if player1.Hand[i][1] == 77:
+                if player1.Last_card[0] < player1.Hand[i][1] and player1.Hand[i+1][1] == 77:
+                    player.Get_pos = i + 2
+                    return 3
+                    
+        
         # 조커가 맨 앞에 있을 경우
-        if is_int(player.Hand[0][0]) == False:
-            if is_int(player.Hand[1][0]) == True:
+        if player.Hand[0][1] == 77:
+            if player.Hand[1][1] == 77:
                 player1.Get_pos = 2
+                return 
         # 조커가 맨 뒤에 있을 경우
-        elif is_int(player1.Hand[len(player1.Hand)-1][0]) == False:
-            if is_int(player.Hand[len(player1.Hand)-1][0]) == True:
+        elif player1.Hand[len(player1.Hand)-1][1] == 77:
+            if player1.Hand[len(player1.Hand)-2][1] == 77:
                 player1.Get_pos = len(player1.Hand)+1
         else:
             for i in range(len(player1.Hand)-2):
-                if is_int(player1.Hand[i]) == False:
-                    if is_int(player1.Hand[i+1]) == False:
-                        player1.Get_pos = i+3
+                if player1.Hand[i][1] == 77:
+                    if player1.Hand[i+1][1] == 77:
+                        player1.Get_pos = i + 3
                         return 3
                     
-                    player1.Get_pos = i + 2
+                    player1.Get_pos = i + 1
                     break
         return 2
 # 3. 그냥 넘어갈 경우
@@ -93,24 +94,24 @@ def DetermineJoker(player1):
     
 def CardPosition(player1, pos, Determined):
     if Determined == 1:
-        if player1.Last_card == 24:
+        if player1.Last_card[0] == 24:
             if pos == 1:
-                player1.Hand[len(player1['Hand'])-1][0] = -1
+                player1.Hand[len(player1.Hand)-1][0] = player1.Hand[0][0] - 0.2
             elif pos == len(player1.Hand):
-                player1.Hand[pos-1][0] = player1.Hand[pos-2][0] + 0.2
-            else:
                 player1.Hand[len(player1.Hand)-1][0] = player1.Hand[pos-2][0] + 0.2
+            else:
+                player1.Hand[len(player1.Hand)-1][0] = (player1.Hand[pos-2][0] + player1.Hand[pos-1][0]) / 2
         else:
             if pos == 1:
-                player1.Hand[len(player1.Hand)-1][0] = - 0.5
+                player1.Hand[len(player1.Hand)-1][0] = player1.Hand[0][0] - 0.5
             elif pos == len(player1.Hand):
-                player1.Hand[pos-1][0] = player1.Hand[pos-2][0] + 0.5
-            else:
                 player1.Hand[len(player1.Hand)-1][0] = player1.Hand[pos-2][0] + 0.5
+            else:
+                player1.Hand[len(player1.Hand)-1][0] = (player1.Hand[pos-2][0] + player1.Hand[pos-1][0]) / 2
         
     elif Determined == 2:
         if pos == player1.Get_pos:
-            player1.Hand[player1.Get_pos-1][0] = player1.Hand[player1.Get_pos-1][0] + player1.Last_card - player1.Hand[player1.Get_pos-2][0]
+            player1.Hand[player1.Get_pos-1][0] = player1.Hand[player1.Get_pos-1][0] + player1.Last_card[0] - player1.Hand[player1.Get_pos-2][0]
     
     player1.Hand.sort()
     print (player1.Hand)
@@ -123,7 +124,7 @@ def draw(player1, deck):
         player1.Hand.append(deck[j])
         if deck[j][0] == 24 or deck[j][0] == 25:
             player1.Num_of_joker = player1.Num_of_joker + 1
-        player1.Last_card = deck[j][0]
+        player1.Last_card = deck[j]
         deck.remove(deck[j])
         player1.Hand.sort()
 
@@ -166,28 +167,39 @@ def EndCheck(player1, player2):
             return 0
 
 
-# In[80]:
+# In[159]:
 
 deck_cnt = 0
 deck = Deck()
-print(deck)
+print(deck.deck)
 
 
-# In[81]:
+# In[160]:
 
 player1 = player()
-Start(player1, deck)
+Start(player1, deck.deck)
+
 Determined = DetermineJoker(player1)
+
+if player1.Num_of_joker == 2: # 첫번째 조커 위치
+    while 1:
+        pos = int(input('pos:'))
+        if pos == 1 or pos == 2 or pos == 3:
+            break
+    CardPosition(player1, pos, Determined)
+    player1.Last_card = player1.Hand[3]
+        
 print ('last:', player1.Last_card)
+print ('joker:', player1.Num_of_joker)
 print ('det:', Determined)
 print ('player1:', player1.Hand)
 
 
-# In[82]:
+# In[161]:
 
 if Determined == 1:
     while 1:
-        pos = int(input('pos1:'))
+        pos = int(input('pos:'))
         if 1 <= pos <= len(player1.Hand):
             if is_int(pos) == True:
                 break
@@ -195,11 +207,24 @@ if Determined == 1:
     
 elif Determined == 2:
     while 1:
-        pos = int(input('pos1:'))
-        if pos == player1.Get_pos-1 or pos == player1.Get_pos:
+        pos = int(input('pos:'))
+        if pos == player1.Get_pos - 1 or pos == player1.Get_pos:
             break
     CardPosition(player1, pos, Determined)
-    
+
+print ('last:', player1.Last_card)
+print ('joker:', player1.Num_of_joker)
+print ('det:', Determined)
+print ('player1:', player1.Hand)
+
+
+# In[162]:
+
+draw(player1, deck.deck)
 print ('p1:', player1.Hand)
-hand_print(player1)
+
+
+# In[163]:
+
+print (player1.Last_card)
 
