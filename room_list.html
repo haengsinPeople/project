@@ -1,1 +1,28 @@
-123
+
+
+<html>
+	<head>
+		<title> room list 대기 방 화면 </title>
+	</head>
+	<style type="text/css">
+		 html{height:100%;}
+ 		body {position:relative;margin:0; padding:0; height:100%}
+ 		#bgbg {position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1; overflow:hidden}
+ 	</style>
+	<body>
+	<meta http-equiv="refresh" content="10">
+	<br><form method = "post" action="../room"><p align="center"><input type="text" name="name" size="10">
+		<input type="submit" value="방만들기">  </br></p>
+	      </form></br>
+	<ul>
+	{% for room in rooms%}
+	
+		{%if room.is_playing%} <h2>{{room.name}}</h2>  게임중.. {%else%} <a href = "../room/{{room.name}}"><h2>{{room.name}}</h2></a> 대기중..  {% endif %} {{room.current_player_number}}명<br>
+		
+		{% for player in room.join_players.all %}
+			<li>{{player.nickname}}님
+		{% endfor %}
+	{% endfor %}
+	<ul>
+	</body>
+</html>

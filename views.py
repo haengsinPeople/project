@@ -4,11 +4,13 @@ from .models import Player, Room
 from django.views.decorators.csrf import csrf_exempt
 from django.template import Context, loader
 from .Davinci import *
+from django.utils import timezone
+
 @csrf_exempt
 def post_main(request):
 	
 	if request.session.get('nickname',) != None:
-		return redirect('/game')
+		return redirect('/')
 
 	tpl = loader.get_template('game/main.html')
 	ctx = Context({})
@@ -30,9 +32,9 @@ def post_explain(request):
 			request.session['nickname'] = nickname
 
 		except NameError:
-			return HttpResponse("<script>alert('닉네임을 입력하지 않았습니다. 다시 입력해주세요.'); history.go(-1);</script>");
+			return HttpResponse("<script>alert('nonickname'); history.go(-1);</script>");
 		except:
-			return HttpResponse("<script>alert('이미 존재하는 닉네임입니다. 다른 닉네임을 입력해주세요.'); history.go(-1);</script>");
+			return HttpResponse("<script>alert('already nickname,,other nickname'); history.go(-1);</script>");
 	        
 	tpl = loader.get_template('game/explain.html')
 	ctx = Context({})
@@ -54,6 +56,22 @@ def post_stay(request):
 	})
 		
 	return HttpResponse(tpl.render(ctx))
+
+@csrf_exempt
+def room_list(request):
+
+    session_nickname = request.session.get('nickname',)
+
+    if session_nickname == None:
+        return redirect('/index')
+    
+    rooms = Room.objects.all()
+    tpl = loader.get_template('game/room_list.html')
+    ctx = Context({
+    'rooms' : rooms
+    })
+		
+    return HttpResponse(tpl.render(ctx))
 
 
 @csrf_exempt
@@ -87,8 +105,8 @@ def post_game(request, name):
 
 		if room.is_playing == False:
 			if player.is_joined and is_entered == False:
-				return HttpResponse("<script>alert('이미 다른 방에 참여하고 있습니다.'); history.go(-1);</script>");
-			else:#다른 방에 조인하지 않았다면,
+				return HttpResponse("<script>alert('already room'); history.go(-1);</script>");
+			else:
 				player.is_joined = True
 			if room.current_player_number == 2:
 				match_player.save()
@@ -98,12 +116,12 @@ def post_game(request, name):
 				room.join_players.add(player)
 				room.player_number += 1
 		elif is_enter == False:
-			return HttpResponse("<script>alert('이미 시작된 방입니다. 다른 방을 이용해주세요.'); history.go(-1);</script>");
+			return HttpResponse("<script>alert('already start room'); history.go(-1);</script>");
 	except:
-		return HttpResponse("오류발생")
+		return HttpResponse("error")
 
 	if room.is_playing == True:
-		#게임 시작
+		
 		wait = False
 	else:
 		wait = True
@@ -111,7 +129,7 @@ def post_game(request, name):
 	ctx = Context({'player' : player, 'match_player' : match_player, 'room' : room,})
 
 	if wait == False:
-		#게임 종료, 게임 중 
+		
 		tpl = loader.get_template('game/game.html')
 
 	elif wait == True:
@@ -124,3 +142,26 @@ def post_game(request, name):
 		
 	return HttpResponse(tpl.render(ctx))
 
+
+@csrf_exempt
+def room(request):
+	if request.session.get('name',) == None:
+		try:
+			name = False
+			name = request.POST['name']
+			name = name.strip()
+			if name == '':
+				raise NameError
+			new_Room = Room(name = name)
+			new_Room.save()
+			request.session['name'] = name
+
+		except NameError:
+			return HttpResponse("<script>alert('nonickname'); history.go(-1);</script>");
+		except:
+			return HttpResponse("<script>alert('already nickname,,other nickname'); history.go(-1);</script>");
+	        
+	tpl = loader.get_template('game/room.html')
+	ctx = Context({})
+
+	return HttpResponse(tpl.render(ctx))

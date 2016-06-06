@@ -1,0 +1,17 @@
+
+
+<html>
+	<head>
+		<title> 대기 방 화면 </title>
+	</head>
+	<body>
+	<ul>
+	{% for rooms in room%}
+		<h2>{{room.name}}</h2><br>
+		{% for player in players %}
+			<li>{{player.nickname}}님
+		{% endfor %}
+	{% endfor %}
+	<ul>
+	</body>
+</html>
