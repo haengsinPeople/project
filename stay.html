@@ -1,20 +1,32 @@
 {% load staticfiles%}
-
 <html>
 	<head>
 		<title> 대기 방 화면 </title>
 	</head>
-	<body>
-	<meta http-equiv="refresh" content="10">
+	<body oncontextmenu='return false' style = "padding : 0px 100px 0px 100px;">
+		<center><img src="{% static "room list.png" %}" width= "900" height="150"></center>
+		
+		<form method="post" action=/game/{{number}}>
+		<p align ="right" ><button type="submit" value="make" style="width:7%; height:5%;">방 생성</button>
+		</form>
+		</p>
+	<meta http-equiv="refresh" content="15">
 	<ul>
 	{% for room in rooms%}
 	
-		{%if room.is_playing%} <h2>{{room.room_name}}</h2>  게임중.. {%else%} <a href = "../room/{{room.name}}"><h2>{{room.room_name}}</h2></a> 대기중..  {% endif %} {{room.player_number}}명<br>
 		
+		{%if room.is_playing%} 
+		
+		<h2><button type="submit" value = "" style="width:100%; height:10%;"> {{room.name}}번 방. 누구누구의 방&nbsp;&nbsp;&nbsp;{{room.player_number}}명/2명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게임중..<br></button></h2>
+
+		{%else%} 
+		<h2><button type="submit" value="login" style="width:100%; height:10%;" onclick="location.href='/game/{{room.name}}'">{{room.name}}번 방. 누구누구의 방 &nbsp;&nbsp;&nbsp;{{room.player_number}}명/2명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대기중..<br></button></h2>
+		{% endif %} 
+
 		{% for player in room.join_players.all %}
-			<li>{{player.nickname}}님
+			<h3><li>&nbsp;&nbsp;{{player.nickname}} 님</li></h3> 
 		{% endfor %}
 	{% endfor %}
 	<ul>
 	</body>
-</html>
+</html> 

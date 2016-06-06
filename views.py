@@ -1,17 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Player, Room, Card
+from .models import Player, Room
 from django.views.decorators.csrf import csrf_exempt
 from django.template import Context, loader
-from .Davinci import *
 @csrf_exempt
-def post_main(request):
+def post_main(request): 
 	
-	if request.session.get('nickname',) != None:
-		return redirect('/game')
+	if request.session.get('nickname',) != None: #닉네임이 없을 경우
+		return redirect('/game')  #game으로 돌려보냄
 
-	tpl = loader.get_template('game/main.html')
-	ctx = Context({})
+	tpl = loader.get_template('game/main.html') #불러온다 
+	ctx = Context({}) #context파일
 
 	return HttpResponse(tpl.render(ctx))
 #main
@@ -22,18 +21,18 @@ def post_explain(request):
 		try:
 			nickname = False
 			nickname = request.POST['nickname']
-			if nickname == '':
-				raise NameError
-			new_player = Player(nickname = nickname)
+			if nickname == '': #닉네임을 입력하지 않은 경우
+				raise NameError 
+			new_player = Player(nickname = nickname) 
 			new_player.save()
 			request.session['nickname'] = nickname
 
-		except NameError:
+		except NameError: #닉네임 입력 X
 			return HttpResponse("<script>alert('닉네임을 입력하지 않았습니다. 다시 입력해주세요.'); history.go(-1);</script>");
-		except:
+		except: #닉네임이 존재할 경우
 			return HttpResponse("<script>alert('이미 존재하는 닉네임입니다. 다른 닉네임을 입력해주세요.'); history.go(-1);</script>");
 	        
-	tpl = loader.get_template('game/explain.html')
+	tpl = loader.get_template('game/explain.html') #넘어감
 	ctx = Context({})
 
 	return HttpResponse(tpl.render(ctx))
@@ -48,9 +47,7 @@ def post_stay(request):
     
 	rooms = Room.objects.all()
 	tpl = loader.get_template('game/stay.html')
-	ctx = Context({
-	'rooms' : rooms
-	})
+	ctx = Context({'rooms' : rooms, 'nickname' : session_nickname })
 		
 	return HttpResponse(tpl.render(ctx))
 
@@ -60,6 +57,8 @@ def post_game(request, name):
 	session_nickname = request.session.get('nickname', )
 	match_player = False
 	wait = False
+	Room.number += 1
+	number = Room.number
 
 	if session_nickname == None:
 		return redirect('/game')
@@ -71,30 +70,25 @@ def post_game(request, name):
 		new_room = Room(name = name)
 		new_room.save()
 		room = Room.objects.get(name = name)
-		i = 0
-		while i < 26:##덱 초기화
-			new_card = Card.objects.get(Index = i)
-			room.Deck.add(new_card)
-			room.Deck_Cnt += 1
-			room.save()
-			i += 1
 
 	try:
 		player = Player.objects.get(nickname = session_nickname)
 		is_enter = False
 
 		for room_player in room.join_players.all():
+            
 			if room_player.nickname == session_nickname:
 				is_enter = True
 			else:
 				match_player = room_player
+
+
 		if room.is_playing == False:
 			if player.is_joined and is_enter == False:
 				return HttpResponse("<script>alert('이미 다른 방에 참여하고 있습니다.'); history.go(-1);</script>");
-			else:
+			else:#다른 방에 조인하지 않았다면,
 				player.is_joined = True
 			if room.player_number == 2:
-				
 				match_player.save()
 				room.is_playing = True
 			elif is_enter == False:
@@ -112,7 +106,7 @@ def post_game(request, name):
 	else:
 		wait = True
 
-	ctx = Context({'player' : player, 'match_player' : match_player, 'room' : room,})
+	ctx = Context({'player' : player, 'match_player' : match_player, 'room' : room, 'number' : number})
 
 	if wait == False:
 		#게임 종료, 게임 중 
@@ -127,4 +121,3 @@ def post_game(request, name):
 	
 		
 	return HttpResponse(tpl.render(ctx))
-
