@@ -145,21 +145,6 @@ def post_game(request, name):
 
 @csrf_exempt
 def room(request):
-	if request.session.get('name',) == None:
-		try:
-			name = False
-			name = request.POST['name']
-			name = name.strip()
-			if name == '':
-				raise NameError
-			new_Room = Room(name = name)
-			new_Room.save()
-			request.session['name'] = name
-
-		except NameError:
-			return HttpResponse("<script>alert('nonickname'); history.go(-1);</script>");
-		except:
-			return HttpResponse("<script>alert('already nickname,,other nickname'); history.go(-1);</script>");
 	        
 	tpl = loader.get_template('game/room.html')
 	ctx = Context({})
