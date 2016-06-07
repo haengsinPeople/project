@@ -1,0 +1,82 @@
+{% load staticfiles %}
+
+ <html>
+        <head>
+            <title>Davinci code</title>
+        </head>
+        
+
+        <body oncontextmenu='return false' bgcolor="black" style = "padding : 20px 20px 20px 20px;">
+        
+        <center><img src="{% static "davinci.png" %}" width= "350" height="60"></center>
+            <div style="width: 1120px; height: 170px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
+                <h1><span style = "color : white">{{match_player}}{{select}}{{num}}</h1>
+                var i = 0
+                {% for card in match_player.Hand.all%}
+                {% if room.match_player[i][1] == 1%}
+                <img src="{%static card.Color%}_{{ card.Number }}.png" widht = "80" height = "80">
+                <span style = "color : white">
+                i++
+                {%else%}
+                <img src="{%static card.Color%}_Back.png" width = "80" height = "80">
+                <span style = "color : white">{{room.match_player[i][1]}}
+                {%endif%}
+                {% endfor %}
+                
+            </div>
+            <div style="width: 150px; height: 400px; border:1px solid black; padding : 0px 0px 0px 30px   px; float: right;">
+                <form>
+                <span style = "color : white">
+                </br></br></br></br></br></br>
+                    <center><h3>Select</h3></center>
+                    <select name="select" >
+                    <option disabled>위치를 선택해 주세요</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="num">&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="1" name="num">&nbsp;1</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="2" name="num">&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="3" name="num">&nbsp;3</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="4" name="num">&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="5" name="num">&nbsp;5</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="6" name="num">&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    <input type="radio" value="7" name="num">&nbsp;7</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="8" name="num">&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="9" name="num">&nbsp;9</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="10" name="num">&nbsp;10&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="11" name="num">&nbsp;11</br>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" value="joker" name="num">&nbsp;Joker
+                    <input type="radio" value="12" name="num">&nbsp;Pass</br></br></center>
+                    <center><button type="submit"><h4>&nbsp;&nbsp;Select&nbsp;&nbsp;</h4></button></center>
+        
+                </form>
+            </div>
+            
+            <div style="width: 1040px; height: 180px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
+            </div>
+             
+            <div style="width: 1120px; height: 170px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
+                <h1><span style = "color : white">{{player}}</h1>
+                {% for card in player.Hand.all%}
+                
+                <img src="{%static card.Color%}_{{ card.Number }}.png" widht = "80" height = "80">
+                <span style = "color : white">{{room.match_player[i][1]}}
+                {% endfor %}
+
+            </div>
+
+        </body>
+    </html>

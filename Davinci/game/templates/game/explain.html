@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Davinci Code Game</title>
+    </head>
+
+    <body bground="white" oncontextmenu='return false' style = "padding : 0px 20px 0px 40px;">
+            <div>
+           <center><img src="{% static "howtoplay.png" %}" width= "700" height="150"></center>
+            </div>
+
+            <div style = "padding : 0px 0px 0px 0px;">
+                <p><h3>1. 플레이어들은 각자 검은 블럭 2개와 흰색 블럭 2개를 랜덤으로 받는다.</p>
+                <p>2. 블럭은 작은 숫자부터 왼쪽으로 세워지며 만약, 흰색의 블럭과 검은 색의 블럭의 숫자가 같을 경우 검은 블럭이 왼쪽에 세워진다.</p>
+                <p>3. 자신의 턴이 되면 랜덤으로 하나의 블럭 추가로 세워진다.</p>
+                <p>4. 상대방 블럭의 위치와 자신이 생각하는 숫자를 선택한다.</p>
+                <p>5. 선택한 정보와 상대방의 블럭의 정보가 일치하는 경우 해당 블럭이 공개되며, 다른 블럭의 정보를 선택하거나 턴을 넘길 수 있다.</p> 
+                <p>6. 정보가 일치하지 않는 경우에는 추가로 세워진 블럭의 숫자가 상대방에게 공개된다.</p>
+                <p>7. 상대방의 패가 모두 공개되면 승리, 자신의 패가 모두 공개되면 패배한다.</p></h3>
+            </div>
+
+            <div style = "padding : 0px 40px 0px 40px;">
+        </br>
+        <form method = "post" action="../game/">
+        <center><input type="image" src="{% static "gamestart.png" %}" width= "350" height="70"/></center>
+        </form>
+         
+        </body>
+    </html> 

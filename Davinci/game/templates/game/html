@@ -1,0 +1,31 @@
+<form>
+위치 : <input type="text" name="location" id="location" maxlength="2" value=""/>
+<table border="select">
+
+1!!!!!!!!!!!!! disabled value 쓰면 비활성화!!!!!!
+<tr>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=0> 0</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=1> 1</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=2> 2</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=3> 3</td>
+</tr>
+<tr>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=4> 4</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=5> 5</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=6> 6</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=7> 7</td>
+</tr>
+<tr>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=8> 8</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=9> 9</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=10> 10</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=11> 11</td>
+</tr>
+<tr>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=12> 12</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=joker> Joker</td>
+ <td><INPUT TYPE=CHECKBOX NAME=num VALUE=pass> Pass</td>
+ <td><input type="submit" value="Select"/> </td>
+</tr>
+</table>
+</form>
