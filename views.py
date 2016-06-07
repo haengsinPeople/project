@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Player, Room
+from .models import Player, Room, Num
 from django.views.decorators.csrf import csrf_exempt
 from django.template import Context, loader
 @csrf_exempt
@@ -11,7 +11,6 @@ def post_main(request):
 
 	tpl = loader.get_template('game/main.html') #불러온다 
 	ctx = Context({}) #context파일
-
 	return HttpResponse(tpl.render(ctx))
 #main
 
@@ -40,15 +39,14 @@ def post_explain(request):
 
 @csrf_exempt
 def post_stay(request):
+	Num.number += 1
 	session_nickname = request.session.get('nickname',)
-
 	if session_nickname == None:
 		return redirect('/')
     
 	rooms = Room.objects.all()
 	tpl = loader.get_template('game/stay.html')
-	ctx = Context({'rooms' : rooms, 'nickname' : session_nickname })
-		
+	ctx = Context({'rooms' : rooms, 'nickname' : session_nickname, 'number':Num.number})
 	return HttpResponse(tpl.render(ctx))
 
 
@@ -57,8 +55,6 @@ def post_game(request, name):
 	session_nickname = request.session.get('nickname', )
 	match_player = False
 	wait = False
-	Room.number += 1
-	number = Room.number
 
 	if session_nickname == None:
 		return redirect('/game')
@@ -106,7 +102,7 @@ def post_game(request, name):
 	else:
 		wait = True
 
-	ctx = Context({'player' : player, 'match_player' : match_player, 'room' : room, 'number' : number})
+	ctx = Context({'player' : player, 'match_player' : match_player, 'room' : room})
 
 	if wait == False:
 		#게임 종료, 게임 중 
