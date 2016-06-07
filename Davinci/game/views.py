@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Player, Room, Card
+from .models import Player, Room, Card, Num
 from django.views.decorators.csrf import csrf_exempt
 from django.template import Context, loader
 from .Davinci import *
@@ -137,12 +137,15 @@ def post_game(request, name):
 			room.Deck.remove(player_new_card)
 			player.Turn += 1
 		elif player.Turn > 1:
-
+			try:
 				if match_player.Hand.order_by('Index')[int(request.GET.get('select'))-1].Number == request.GET.get('num'):
+					card = Card.objects.get(Index = match_player.Hand.order_by('Index')[int(request.GET.get('select'))-1].Index)
+					card.Is_finded = True
+					card.save()
+					match_player.Finded += 1
 					match_player.save()
 					player.Turn += 1
 				else:
-					room.player[0][1] = 1
 					if player.Turn == 0:
 						match_player.Turn = 1
 						plyer.Turn = 0
@@ -150,7 +153,7 @@ def post_game(request, name):
 						player.Turn = 0
 						match_player.Turn = 1
 					match_player.save()
-
+			except:
 				if request.GET.get('num') == '12':
 					if player.Turn == 0:
 						match_player.Turn = 1
@@ -159,8 +162,6 @@ def post_game(request, name):
 						player.Turn = 0
 						match_player.Turn = 1
 					match_player.save()
-
-
 		wait = False
 	else:
 		wait = True
@@ -168,8 +169,30 @@ def post_game(request, name):
 	ctx = Context({'player' : player, 'match_player' : match_player, 'room' : room, 'num' : request.GET.get('num'), 'select' : request.POST.get('select'), })
 
 	if wait == False:
-		#게임 종료, 게임 중 
-		tpl = loader.get_template('game/game.html')
+		end = EndCheck(player,match_player)
+		if end == 1:
+			i = 0
+			while i < 24:
+				new_card = Card.objects.get(Index = i)
+				new_card.Is_finded = False
+				new_card.save()
+				i += 1
+			wait = True
+			tpl = loader.get_template('game/lose.html')
+			return HttpResponse(tpl.render(ctx))
+		elif end == 2:
+			i = 0
+			while i < 24:
+				new_card = Card.objects.get(Index = i)
+				new_card.Is_finded = False
+				new_card.save()
+				i += 1
+			wait = True
+			tpl = loader.get_template('game/win.html')
+			return HttpResponse(tpl.render(ctx))
+		elif end == 0:
+			tpl = loader.get_template('game/game.html')
+			wait = False
 
 	elif wait == True:
 		tpl = loader.get_template('game/wait.html')

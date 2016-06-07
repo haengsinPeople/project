@@ -15,7 +15,6 @@ class Player(models.Model):
     is_joined = models.BooleanField(default = False, null = False)
     Turn = models.IntegerField(default = 0, null = False)
     Finded = models.IntegerField(default = 0, null = False)
-    Get_pos = models.IntegerField(default = 0, null = False)
     Hand = models.ManyToManyField(Card)
     Hand_cnt = models.IntegerField(default = 0, null = False)
     def __str__(self):

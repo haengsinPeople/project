@@ -7,19 +7,16 @@
         
 
         <body oncontextmenu='return false' bgcolor="black" style = "padding : 20px 20px 20px 20px;">
-        
         <center><img src="{% static "davinci.png" %}" width= "350" height="60"></center>
             <div style="width: 1120px; height: 170px; border:1px solid black; padding : 0px 0px 0px 10px; float: left;">
-                <h1><span style = "color : white">{{match_player}}{{select}}{{num}}</h1>
-                var i = 0
+                <h1><span style = "color : white">{{match_player}}</h1>
                 {% for card in match_player.Hand.all%}
-                {% if room.match_player[i][1] == 1%}
+                {% if card.Is_finded == True%}  
                 <img src="{%static card.Color%}_{{ card.Number }}.png" widht = "80" height = "80">
                 <span style = "color : white">
-                i++
                 {%else%}
                 <img src="{%static card.Color%}_Back.png" width = "80" height = "80">
-                <span style = "color : white">{{room.match_player[i][1]}}
+                <span style = "color : white">
                 {%endif%}
                 {% endfor %}
                 
@@ -73,7 +70,7 @@
                 {% for card in player.Hand.all%}
                 
                 <img src="{%static card.Color%}_{{ card.Number }}.png" widht = "80" height = "80">
-                <span style = "color : white">{{room.match_player[i][1]}}
+                <span style = "color : white">
                 {% endfor %}
 
             </div>

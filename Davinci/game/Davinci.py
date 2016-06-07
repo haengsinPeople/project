@@ -93,7 +93,11 @@ def CardPosition(player1, pos, Determined):
     
     #elif Determined == 3:
         
-    
+def Invert(a):
+    if int(a) >= 10:
+        a = a
+    else:
+        a = '0' + a
 def draw(deck_cnt):
         j = random.randint(0,deck_cnt)
 
@@ -135,12 +139,11 @@ def hand_print(player1):
         print(prt)
 
 def EndCheck(player1, player2):
-        if player1.Finded == len(player1.Hand):
-            print ("player2 Win")
+        if player1.Finded == player1.Hand_cnt:
             return 1
-        elif player2.Finded == len(player2.Hand):
+        elif player2.Finded == player2.Hand_cnt:
             print ("player1 Win")
-            return 1
+            return 2
         else:
             return 0
 
