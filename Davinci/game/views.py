@@ -177,6 +177,10 @@ def post_game(request, name):
 				new_card.Is_finded = False
 				new_card.save()
 				i += 1
+			player.delete()
+			del request.session['nickname']
+			room.delete()
+			player.is_joined = False
 			wait = True
 			tpl = loader.get_template('game/lose.html')
 			return HttpResponse(tpl.render(ctx))
@@ -187,6 +191,9 @@ def post_game(request, name):
 				new_card.Is_finded = False
 				new_card.save()
 				i += 1
+			player.delete()
+			del request.session['nickname']
+			player.is_joined = False
 			wait = True
 			tpl = loader.get_template('game/win.html')
 			return HttpResponse(tpl.render(ctx))
@@ -203,4 +210,3 @@ def post_game(request, name):
 	
 		
 	return HttpResponse(tpl.render(ctx))
-
